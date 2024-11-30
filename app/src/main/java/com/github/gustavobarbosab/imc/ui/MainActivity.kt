@@ -1,4 +1,4 @@
-package com.github.gustavobarbosab.imc
+package com.github.gustavobarbosab.imc.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
