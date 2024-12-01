@@ -1,7 +1,7 @@
-package com.github.gustavobarbosab.imc.ui.feature.input
+package com.github.gustavobarbosab.imc.feature.input.presentation
 
 import androidx.lifecycle.ViewModel
-import com.github.gustavobarbosab.imc.ui.feature.input.model.InputScreenState
+import com.github.gustavobarbosab.imc.feature.input.presentation.model.InputScreenState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -11,15 +11,15 @@ class InputScreenViewModel : ViewModel() {
     private val _state = MutableStateFlow(InputScreenState.initialState())
     val state = _state.asStateFlow()
 
-    fun onWeightChanged(value: String?) {
+    fun onWeightChanged(value: String) {
         _state.update {
-            it.copy(weight = value.orEmpty())
+            it.copy(weight = value)
         }
     }
 
-    fun onHeightChanged(value: String?) {
+    fun onHeightChanged(value: String) {
         _state.update {
-            it.copy(height = value.orEmpty())
+            it.copy(height = value)
         }
     }
 

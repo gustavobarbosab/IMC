@@ -1,7 +1,8 @@
-package com.github.gustavobarbosab.imc.ui.feature.input.model
+package com.github.gustavobarbosab.imc.feature.input.presentation.model
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import com.github.gustavobarbosab.imc.common.UiText
 
 @Immutable
 data class InputScreenState(
@@ -22,7 +23,5 @@ data class InputScreenState(
 
 sealed class FieldFeedback {
     data object Empty : FieldFeedback()
-    data class Error(
-        @StringRes val feedbackResource: Int
-    ) : FieldFeedback()
+    data class Error(val feedbackText: UiText) : FieldFeedback()
 }

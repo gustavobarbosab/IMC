@@ -13,9 +13,10 @@
         android:theme="@style/Theme.IMC"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.IMC">
+            android:theme="@style/Theme.IMC"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
