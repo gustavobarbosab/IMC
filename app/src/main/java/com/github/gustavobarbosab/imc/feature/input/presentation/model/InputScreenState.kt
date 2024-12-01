@@ -1,27 +1,41 @@
 package com.github.gustavobarbosab.imc.feature.input.presentation.model
 
-import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import com.github.gustavobarbosab.imc.common.UiText
+import com.github.gustavobarbosab.imc.common.value
 
 @Immutable
 data class InputScreenState(
     val height: String,
-    val heightError: FieldFeedback?,
+    val heightFeedback: FieldFeedback?,
     val weight: String,
-    val weightError: FieldFeedback?,
+    val weightFeedback: FieldFeedback?,
 ) {
     companion object {
         fun initialState() = InputScreenState(
             height = "",
-            heightError = null,
+            heightFeedback = null,
             weight = "",
-            weightError = null
+            weightFeedback = null
         )
     }
 }
 
 sealed class FieldFeedback {
-    data object Empty : FieldFeedback()
+    data object Nothing : FieldFeedback()
     data class Error(val feedbackText: UiText) : FieldFeedback()
+}
+
+@Composable
+fun FieldFeedback?.onFeedback(
+    func: @Composable (String) -> Unit
+): (@Composable () -> Unit)? = when (this) {
+    is FieldFeedback.Error -> {
+        {
+            func(feedbackText.value)
+        }
+    }
+
+    else -> null
 }

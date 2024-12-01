@@ -23,7 +23,7 @@ fun PrimaryButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        contentPadding = PaddingValues(MaterialTheme.spacing.medium),
+        contentPadding = PaddingValues(MaterialTheme.spacing.small),
         content = content
     )
 }

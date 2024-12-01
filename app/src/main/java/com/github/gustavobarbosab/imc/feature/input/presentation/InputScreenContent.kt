@@ -13,7 +13,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.github.gustavobarbosab.imc.R
 import com.github.gustavobarbosab.imc.common.components.PrimaryButton
 import com.github.gustavobarbosab.imc.feature.input.presentation.model.InputScreenState
+import com.github.gustavobarbosab.imc.feature.input.presentation.model.onFeedback
 import com.github.gustavobarbosab.imc.theme.BMITheme
 import com.github.gustavobarbosab.imc.theme.spacing
 
@@ -42,6 +42,7 @@ fun InputScreenContent(
         0.4f to Color(0xFF1BC9B9),
         0.9f to Color(0xFF8DAFFF)
     )
+
     Column(
         modifier
             .background(gradient)
@@ -73,10 +74,14 @@ fun InputScreenContent(
                 focusedLabelColor = Color.White,
                 unfocusedLabelColor = Color.White
             ),
+            suffix = { Text("kg") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Decimal,
                 imeAction = ImeAction.Next
             ),
+            supportingText = screenState.weightFeedback.onFeedback { feedback ->
+                Text(feedback)
+            },
             value = screenState.weight,
             onValueChange = onWeightChanged,
             label = { Text("Digite seu peso") }
@@ -86,6 +91,7 @@ fun InputScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = MaterialTheme.spacing.extraMedium),
+            suffix = { Text("cm") },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = Color.White,
                 focusedBorderColor = Color.White,
@@ -97,6 +103,9 @@ fun InputScreenContent(
                 keyboardType = KeyboardType.Decimal,
                 imeAction = ImeAction.Go
             ),
+            supportingText = screenState.heightFeedback.onFeedback { feedback ->
+                Text(feedback)
+            },
             value = screenState.height,
             onValueChange = onHeightChanged,
             label = { Text("Digite sua altura") }
