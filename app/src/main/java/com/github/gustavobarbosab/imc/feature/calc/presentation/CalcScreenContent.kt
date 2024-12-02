@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.github.gustavobarbosab.imc.common.components.SecondaryButton
 import com.github.gustavobarbosab.imc.common.UiText
 import com.github.gustavobarbosab.imc.common.value
+import com.github.gustavobarbosab.imc.feature.about.AboutBMIBottomSheet
 import com.github.gustavobarbosab.imc.feature.calc.presentation.model.BMIWeightState
 import com.github.gustavobarbosab.imc.feature.calc.presentation.model.CalcScreenState
 import com.github.gustavobarbosab.imc.theme.BMITheme
@@ -30,7 +31,8 @@ import com.github.gustavobarbosab.imc.theme.spacing
 fun CalcScreenContent(
     modifier: Modifier = Modifier,
     screenState: CalcScreenState,
-    onClickToLearnMore: () -> Unit
+    onClickToLearnMore: () -> Unit,
+    onDismissAboutModal: () -> Unit
 ) {
     Scaffold(
         modifier
@@ -40,9 +42,7 @@ fun CalcScreenContent(
                 .padding(padding)
                 .fillMaxSize()
                 .background(
-                    Brush.linearGradient(
-                        colorStops = screenState.backgroundColor
-                    )
+                    Brush.linearGradient(colorStops = screenState.background)
                 )
                 .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
@@ -85,6 +85,11 @@ fun CalcScreenContent(
                     Text("Saiba mais")
                 }
             }
+
+            AboutBMIBottomSheet(
+                onDismiss = onDismissAboutModal,
+                visible = screenState.showAbout
+            )
         }
     }
 }
@@ -98,9 +103,11 @@ private fun preview() {
             screenState = CalcScreenState(
                 bmi = "43.9",
                 message = UiText.TextString("Você está com obesidade nível 2..."),
-                backgroundColor = BMIWeightState.Overweight.color
+                _backgroundColor = BMIWeightState.Overweight.color,
+                showAbout = false
             ),
-            onClickToLearnMore = {}
+            onClickToLearnMore = {},
+            onDismissAboutModal = {}
         )
     }
 }

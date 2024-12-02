@@ -4,11 +4,11 @@ import androidx.compose.ui.graphics.Color
 import com.github.gustavobarbosab.imc.common.UiText
 
 sealed class BMIWeightState(
-    val color: Array<Pair<Float, Color>>,
+    val color: List<Pair<Float, Color>>,
     val description: UiText
 ) {
     data object Underweight : BMIWeightState(
-        arrayOf(
+        listOf(
             0.4f to Color(0xff2E86CE),
             0.9f to Color(0xff54C8EB),
         ),
@@ -16,7 +16,7 @@ sealed class BMIWeightState(
     )
 
     data object Normal : BMIWeightState(
-        arrayOf(
+        listOf(
             0.4f to Color(0xff2ECE81),
             0.9f to Color(0xff8BEB54),
         ),
@@ -24,7 +24,7 @@ sealed class BMIWeightState(
     )
 
     data object Overweight : BMIWeightState(
-        arrayOf(
+        listOf(
             0.4f to Color(0xffCEC12E),
             0.9f to Color(0xffEBE354),
         ),
@@ -32,7 +32,7 @@ sealed class BMIWeightState(
     )
 
     data object Obese : BMIWeightState(
-        arrayOf(
+        listOf(
             0.4f to Color(0xffCE2E2E),
             0.9f to Color(0xffEB5454),
         ),
