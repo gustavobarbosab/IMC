@@ -67,7 +67,7 @@ class InputScreenViewModel(
             )
 
             InvalidType.NotMatch -> FieldFeedback.Error(
-                UiText.TextString("O peso informado é inválido...")
+                UiText.TextString("Peso inválido")
             )
 
             null -> null
@@ -79,7 +79,7 @@ class InputScreenViewModel(
             )
 
             InvalidType.NotMatch -> FieldFeedback.Error(
-                UiText.TextString("A altura informada é inválida...")
+                UiText.TextString("Altura inválida")
             )
 
             null -> null
@@ -94,6 +94,12 @@ class InputScreenViewModel(
     }
 
     private fun redirectToCalc(weight: String, height: String) {
+        _state.update {
+            it.copy(
+                weightFeedback = null,
+                heightFeedback = null
+            )
+        }
         viewModelScope.launch {
             _viewAction.emit(ViewActions.RedirectToCalc(weight, height))
         }

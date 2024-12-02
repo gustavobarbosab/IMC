@@ -1,5 +1,6 @@
 package com.github.gustavobarbosab.imc.feature.input.data.usecase
 
+import androidx.core.text.isDigitsOnly
 import com.github.gustavobarbosab.imc.feature.input.data.usecase.BMIDataValidatorUseCase.InvalidType
 import com.github.gustavobarbosab.imc.feature.input.data.usecase.BMIDataValidatorUseCase.ValidationResult
 
@@ -38,20 +39,20 @@ class BMIDataValidatorUseCaseImpl : BMIDataValidatorUseCase {
     ): ValidationResult {
         val weightInvalidType: InvalidType? = when {
             weight.isNullOrBlank() -> InvalidType.Empty
-            validationRegex.matches(weight) -> InvalidType.NotMatch
+            !validationRegex.matches(weight) -> InvalidType.NotMatch
             else -> null
         }
 
         val heightInvalidType: InvalidType? = when {
             height.isNullOrBlank() -> InvalidType.Empty
-            validationRegex.matches(height) -> InvalidType.NotMatch
+            !height.isDigitsOnly() -> InvalidType.NotMatch
             else -> null
         }
 
         if (weightInvalidType == null && heightInvalidType == null) {
             return ValidationResult.ValidFields(
-                weight.orEmpty(),
-                height.orEmpty()
+                weight?.replace(',', '.').orEmpty(),
+                height?.replace(',', '.').orEmpty()
             )
         }
 

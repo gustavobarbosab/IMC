@@ -68,11 +68,12 @@ fun InputScreenContent(
                 .fillMaxWidth()
                 .padding(horizontal = MaterialTheme.spacing.extraMedium),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.White,
-                focusedLabelColor = Color.White,
-                unfocusedLabelColor = Color.White
+                focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
             ),
             suffix = { Text("kg") },
             keyboardOptions = KeyboardOptions(
@@ -84,7 +85,8 @@ fun InputScreenContent(
             },
             value = screenState.weight,
             onValueChange = onWeightChanged,
-            label = { Text("Digite seu peso") }
+            label = { Text("Digite seu peso") },
+            placeholder = { Text("Ex: 89.3") }
         )
 
         OutlinedTextField(
@@ -93,11 +95,12 @@ fun InputScreenContent(
                 .padding(horizontal = MaterialTheme.spacing.extraMedium),
             suffix = { Text("cm") },
             colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.White,
-                focusedLabelColor = Color.White,
-                unfocusedLabelColor = Color.White
+                focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
             ),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Decimal,
@@ -108,7 +111,8 @@ fun InputScreenContent(
             },
             value = screenState.height,
             onValueChange = onHeightChanged,
-            label = { Text("Digite sua altura") }
+            label = { Text("Digite sua altura") },
+            placeholder = { Text("Ex: 180") }
         )
 
         PrimaryButton(
