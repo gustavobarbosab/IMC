@@ -22,7 +22,8 @@ import com.github.gustavobarbosab.imc.common.components.SecondaryButton
 import com.github.gustavobarbosab.imc.common.UiText
 import com.github.gustavobarbosab.imc.common.value
 import com.github.gustavobarbosab.imc.feature.about.AboutBMIBottomSheet
-import com.github.gustavobarbosab.imc.feature.calc.presentation.model.BMIWeightState
+import com.github.gustavobarbosab.imc.feature.calc.data.entity.BMIType
+import com.github.gustavobarbosab.imc.feature.calc.presentation.model.CalcScreenBMIBackgroundColor
 import com.github.gustavobarbosab.imc.feature.calc.presentation.model.CalcScreenState
 import com.github.gustavobarbosab.imc.theme.BMITheme
 import com.github.gustavobarbosab.imc.theme.spacing
@@ -42,7 +43,7 @@ fun CalcScreenContent(
                 .padding(padding)
                 .fillMaxSize()
                 .background(
-                    Brush.linearGradient(colorStops = screenState.background)
+                    Brush.linearGradient(colorStops = screenState.backgroundColor)
                 )
                 .padding(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
@@ -54,7 +55,7 @@ fun CalcScreenContent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    screenState.bmi,
+                    screenState.bmi.value,
                     style = MaterialTheme.typography.displayLarge
                 )
 
@@ -101,9 +102,9 @@ private fun preview() {
         CalcScreenContent(
             modifier = Modifier,
             screenState = CalcScreenState(
-                bmi = "43.9",
+                bmi = UiText.TextString("43.9"),
                 message = UiText.TextString("Você está com obesidade nível 2..."),
-                _backgroundColor = BMIWeightState.Overweight.color,
+                backgroundColorList = CalcScreenBMIBackgroundColor.Overweight.color,
                 showAbout = false
             ),
             onClickToLearnMore = {},

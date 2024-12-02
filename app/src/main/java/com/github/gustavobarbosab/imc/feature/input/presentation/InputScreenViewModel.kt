@@ -93,7 +93,7 @@ class InputScreenViewModel(
         }
     }
 
-    private fun redirectToCalc(weight: String, height: String) {
+    private fun redirectToCalc(weight: Float, height: Int) {
         _state.update {
             it.copy(
                 weightFeedback = null,
@@ -108,8 +108,8 @@ class InputScreenViewModel(
 
     sealed class ViewActions {
         data class RedirectToCalc(
-            val weight: String,
-            val height: String
+            val weight: Float,
+            val height: Int
         ) : ViewActions()
     }
 }

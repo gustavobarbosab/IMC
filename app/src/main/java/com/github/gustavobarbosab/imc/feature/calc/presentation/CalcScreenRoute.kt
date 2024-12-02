@@ -7,8 +7,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CalcScreenRoute(
-    val weight: String,
-    val height: String
+    val weight: Float,
+    val height: Int
 )
 
 fun NavGraphBuilder.calcScreenRoute(navController: NavController) {

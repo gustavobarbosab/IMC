@@ -18,8 +18,8 @@ interface BMIDataValidatorUseCase {
         ) : ValidationResult()
 
         data class ValidFields(
-            val weightValue: String,
-            val heightValue: String
+            val weightValue: Float,
+            val heightValue: Int
         ) : ValidationResult()
     }
 
@@ -51,8 +51,8 @@ class BMIDataValidatorUseCaseImpl : BMIDataValidatorUseCase {
 
         if (weightInvalidType == null && heightInvalidType == null) {
             return ValidationResult.ValidFields(
-                weight?.replace(',', '.').orEmpty(),
-                height?.replace(',', '.').orEmpty()
+                weight.convertToFloat(),
+                height.convertToInt()
             )
         }
 
@@ -61,4 +61,9 @@ class BMIDataValidatorUseCaseImpl : BMIDataValidatorUseCase {
             heightInvalidType
         )
     }
+
+    private fun String?.convertToFloat(): Float = this?.replace(',', '.')?.toFloat() ?: 0f
+
+    private fun String?.convertToInt(): Int = this?.toInt() ?: 0
+
 }

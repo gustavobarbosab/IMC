@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calculator_underweight">Seu peso está abaixo do normal...</string>
+    <string name="calculator_normal">Seu peso está normal...</string>
+    <string name="calculator_overweight">Você está com sobrepeso...</string>
+    <string name="calculator_obese">Você está em grau de obesidade...</string>
+</resources>
