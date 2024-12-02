@@ -6,7 +6,10 @@ import androidx.navigation.compose.composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object CalcScreenRoute
+data class CalcScreenRoute(
+    val weight: String,
+    val height: String
+)
 
 fun NavGraphBuilder.calcScreenRoute(navController: NavController) {
     composable<CalcScreenRoute> {

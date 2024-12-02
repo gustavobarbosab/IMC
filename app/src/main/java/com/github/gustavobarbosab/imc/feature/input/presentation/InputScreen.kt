@@ -17,7 +17,7 @@ fun InputScreen(navController: NavController) {
         viewModel.viewAction.collect { viewAction ->
             when (viewAction) {
                 is InputScreenViewModel.ViewActions.RedirectToCalc -> navController.navigate(
-                    CalcScreenRoute
+                    CalcScreenRoute(viewAction.weight, viewAction.height)
                 )
             }
         }
