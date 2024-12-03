@@ -56,7 +56,8 @@ fun CalcScreenContent(
             ) {
                 Text(
                     screenState.bmi.value,
-                    style = MaterialTheme.typography.displayLarge
+                    style = MaterialTheme.typography.displayLarge,
+                    color = Color.White
                 )
 
                 HorizontalDivider(

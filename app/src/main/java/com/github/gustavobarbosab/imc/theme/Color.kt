@@ -19,3 +19,18 @@ val Grey50 = Color(color = 0xFF6E7C80)
 val Grey70 = Color(0xFFB3B8B8)
 val Grey90 = Color(color = 0xFFE0E3E3)
 val Grey95 = Color(color = 0xFFEFF1F1)
+
+val Color.Companion.JordyBlue
+    get() = Color(color = 0xFF8DAFFF)
+
+val Color.Companion.KiwiGreen
+    get() = Color(color = 0xFF8BEB54)
+
+val Color.Companion.MinionYellow
+    get() = Color(color = 0xFFEBE354)
+
+val Color.Companion.PersianRed
+    get() = Color(color = 0xFFCE2E2E)
+
+val Color.Companion.PhilippineGray
+    get() = Color(color = 0xFF8A8A8A)

@@ -1,26 +1,22 @@
 package com.github.gustavobarbosab.imc.feature.about
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutBMIBottomSheet(
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
     visible: Boolean
 ) {
@@ -28,30 +24,26 @@ fun AboutBMIBottomSheet(
         return
     }
 
-    val sheetState = rememberModalBottomSheetState()
+    val bottomSheetState = rememberModalBottomSheetState()
+    val viewModel: AboutBMIViewModel = viewModel()
+    val screenState by viewModel.state.collectAsState()
     val scope = rememberCoroutineScope()
 
     ModalBottomSheet(
+        modifier = modifier,
         onDismissRequest = onDismiss,
-        sheetState = sheetState,
+        sheetState = bottomSheetState,
         scrimColor = Color.Black.copy(0.6f),
+        containerColor = Color.White,
         content = {
-            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .height(128.dp), contentAlignment = Alignment.Center
-                ) {
-                    Text("Swipe up to expand sheet")
+            AboutBMIBottomSheetContent(
+                screenState = screenState,
+                onGotItClicked = {
+                    scope.launch {
+                        bottomSheetState.hide()
+                    }
                 }
-                Text("Sheet content")
-                Button(
-                    modifier = Modifier.padding(bottom = 64.dp),
-                    onClick = { scope.launch { sheetState.partialExpand() } }
-                ) {
-                    Text("Click to collapse sheet")
-                }
-            }
+            )
         }
     )
 }
