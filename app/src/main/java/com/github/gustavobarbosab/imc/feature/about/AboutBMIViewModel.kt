@@ -9,5 +9,4 @@ class AboutBMIViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(AboutBMIScreenState())
     val state = _state.asStateFlow()
-
 }
