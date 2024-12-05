@@ -44,11 +44,12 @@ fun InputScreenContent(
         0.9f to Color(0xFF8DAFFF)
     )
 
-    Scaffold {
+    Scaffold { innerPadding ->
         Column(
             modifier
-                .background(gradient)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(innerPadding)
+                .background(gradient),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
