@@ -16,8 +16,8 @@ fun CalcScreen(navController: NavController) {
 
     CalcScreenContent(
         screenState = screenState,
-        onClickToLearnMore = viewModel::showAboutBottomSheet,
-        onDismissAboutModal = viewModel::dismissAboutBottomSheet,
+        onClickToLearnMore = { viewModel.showAboutBottomSheet() },
+        onDismissAboutModal = { viewModel.dismissAboutBottomSheet() },
         onBackPressed = { navController.navigateUp() }
     )
 }

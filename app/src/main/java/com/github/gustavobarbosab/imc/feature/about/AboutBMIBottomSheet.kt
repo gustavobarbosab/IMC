@@ -41,6 +41,7 @@ fun AboutBMIBottomSheet(
                 onGotItClicked = {
                     scope.launch {
                         bottomSheetState.hide()
+                        onDismiss()
                     }
                 }
             )
