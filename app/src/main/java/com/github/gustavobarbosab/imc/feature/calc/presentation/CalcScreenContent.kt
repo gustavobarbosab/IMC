@@ -24,9 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.gustavobarbosab.imc.R
 import com.github.gustavobarbosab.imc.common.UiText
 import com.github.gustavobarbosab.imc.common.components.SecondaryButton
 import com.github.gustavobarbosab.imc.common.value
@@ -45,8 +47,9 @@ fun CalcScreenContent(
     onDismissAboutModal: () -> Unit,
     onBackPressed: () -> Unit
 ) {
-    val background = remember { Brush.linearGradient(colorStops = screenState.backgroundColor) }
-    Box(Modifier.background(background)) {
+    val gradient = remember { Brush.linearGradient(colorStops = screenState.backgroundColor) }
+
+    Box(Modifier.background(gradient)) {
         Scaffold(
             containerColor = Color.Transparent,
             topBar = {
@@ -57,7 +60,7 @@ fun CalcScreenContent(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(end = MaterialTheme.spacing.extraMedium),
-                            text = "Seu IMC",
+                            text = stringResource(R.string.calculator_toolbar),
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.titleMedium,
                             color = Color.White
@@ -67,7 +70,7 @@ fun CalcScreenContent(
                         IconButton(onClick = onBackPressed) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = "Back button icon"
+                                contentDescription = stringResource(R.string.calculator_toolbar_back_button_content_description)
                             )
                         }
                     }
@@ -78,13 +81,19 @@ fun CalcScreenContent(
                 modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .padding(horizontal = 24.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                    .padding(horizontal = MaterialTheme.spacing.extraMedium),
+                verticalArrangement = Arrangement.spacedBy(
+                    MaterialTheme.spacing.medium,
+                    Alignment.CenterVertically
+                ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Column(
                     modifier = Modifier.weight(0.7f),
-                    verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                    verticalArrangement = Arrangement.spacedBy(
+                        MaterialTheme.spacing.medium,
+                        Alignment.CenterVertically
+                    ),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
@@ -114,10 +123,10 @@ fun CalcScreenContent(
                     SecondaryButton(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 16.dp),
+                            .padding(vertical = MaterialTheme.spacing.medium),
                         onClick = onClickToLearnMore,
                     ) {
-                        Text("Saiba mais")
+                        Text(stringResource(R.string.calculator_button_label))
                     }
                 }
 

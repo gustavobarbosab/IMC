@@ -12,19 +12,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.gustavobarbosab.imc.R
+import com.github.gustavobarbosab.imc.common.BMITextFieldDefaults
 import com.github.gustavobarbosab.imc.common.components.PrimaryButton
 import com.github.gustavobarbosab.imc.feature.input.presentation.model.InputScreenState
 import com.github.gustavobarbosab.imc.feature.input.presentation.model.onFeedback
@@ -39,10 +41,9 @@ fun InputScreenContent(
     onWeightChanged: (String) -> Unit,
     onClickToCalculate: () -> Unit
 ) {
-    val gradient = Brush.linearGradient(
-        0.4f to Color(0xFF1BC9B9),
-        0.9f to Color(0xFF8DAFFF)
-    )
+    val gradient = remember {
+        Brush.linearGradient(colorStops = screenState.backgroundColor)
+    }
 
     Scaffold { innerPadding ->
         Column(
@@ -58,7 +59,7 @@ fun InputScreenContent(
                 Image(
                     modifier = Modifier.align(Alignment.BottomCenter),
                     painter = painterResource(R.drawable.app_logo),
-                    contentDescription = "App logo"
+                    contentDescription = stringResource(R.string.input_screen_logo_content_description)
                 )
             }
 
@@ -70,15 +71,8 @@ fun InputScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = MaterialTheme.spacing.extraMedium),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
-                ),
-                suffix = { Text("kg") },
+                colors = BMITextFieldDefaults.colors,
+                suffix = { Text(stringResource(R.string.input_screen_weight_field_suffix)) },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Decimal,
                     imeAction = ImeAction.Next
@@ -88,23 +82,16 @@ fun InputScreenContent(
                 },
                 value = screenState.weight,
                 onValueChange = onWeightChanged,
-                label = { Text("Digite seu peso") },
-                placeholder = { Text("Ex: 89.3") }
+                label = { Text(stringResource(R.string.input_screen_weight_field_label)) },
+                placeholder = { Text(stringResource(R.string.input_screen_weight_field_hint)) }
             )
 
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = MaterialTheme.spacing.extraMedium),
-                suffix = { Text("cm") },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                    unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                    focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
-                ),
+                suffix = { Text(stringResource(R.string.input_screen_height_field_suffix)) },
+                colors = BMITextFieldDefaults.colors,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Decimal,
                     imeAction = ImeAction.Go
@@ -114,8 +101,8 @@ fun InputScreenContent(
                 },
                 value = screenState.height,
                 onValueChange = onHeightChanged,
-                label = { Text("Digite sua altura") },
-                placeholder = { Text("Ex: 180") }
+                label = { Text(stringResource(R.string.input_screen_height_field_label)) },
+                placeholder = { Text(stringResource(R.string.input_screen_height_field_hint)) }
             )
 
             PrimaryButton(
@@ -128,7 +115,7 @@ fun InputScreenContent(
                     ),
                 onClick = onClickToCalculate
             ) {
-                Text("Calcular")
+                Text(stringResource(R.string.input_screen_height_button_label))
             }
         }
     }

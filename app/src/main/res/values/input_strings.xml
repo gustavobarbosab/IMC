@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="input_screen_logo_content_description">App logo</string>
+    <string name="input_screen_weight_field_suffix">kg</string>
+    <string name="input_screen_weight_field_label">Digite seu peso</string>
+    <string name="input_screen_weight_field_hint">Ex: 89.3</string>
+    <string name="input_screen_height_field_suffix">cm</string>
+    <string name="input_screen_height_field_label">Digite sua altura</string>
+    <string name="input_screen_height_field_hint">Ex: 180</string>
+    <string name="input_screen_height_button_label">Calcular</string>
+</resources>
