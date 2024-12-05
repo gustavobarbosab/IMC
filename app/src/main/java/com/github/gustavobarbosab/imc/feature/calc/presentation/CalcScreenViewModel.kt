@@ -3,6 +3,7 @@ package com.github.gustavobarbosab.imc.feature.calc.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.toRoute
+import com.github.gustavobarbosab.imc.R
 import com.github.gustavobarbosab.imc.common.UiText
 import com.github.gustavobarbosab.imc.feature.calc.data.usecase.BMICalculatorUseCase
 import com.github.gustavobarbosab.imc.feature.calc.data.usecase.BMICalculatorUseCaseImpl
@@ -33,8 +34,8 @@ class CalcScreenViewModel(
             )
 
             BMICalculatorUseCase.Result.InvalidData -> Triple(
-                UiText.TextString("--"),
-                UiText.TextString("Dados inválidos..."),
+                UiText.TextResource(R.string.calculator_bmi_field_default),
+                UiText.TextResource(R.string.calculator_message_field_default),
                 CalcScreenBMIBackgroundColor.Default
             )
         }

@@ -7,4 +7,7 @@
     <string name="calculator_overweight">Você está com sobrepeso</string>
     <string name="calculator_obese">Você está em grau de obesidade</string>
     <string name="calculator_button_label">Saiba mais</string>
+    <string name="calculator_bmi_field_default">--</string>
+    <string name="calculator_message_field_default">Dados inválidos...</string>
+    <string name="calculator_message_field_loading">Carregando...</string>
 </resources>

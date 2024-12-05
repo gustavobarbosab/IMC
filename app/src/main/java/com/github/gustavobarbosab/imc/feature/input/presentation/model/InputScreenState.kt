@@ -37,12 +37,8 @@ sealed class FieldFeedback {
 @Composable
 fun FieldFeedback?.onFeedback(
     func: @Composable (String) -> Unit
-): (@Composable () -> Unit)? = when (this) {
-    is FieldFeedback.Error -> {
-        {
-            func(feedbackText.value)
-        }
-    }
-
-    else -> null
+): (@Composable () -> Unit)? = if (this is FieldFeedback.Error) {
+    { func(this.feedbackText.value) }
+} else {
+    null
 }

@@ -1,6 +1,7 @@
 package com.github.gustavobarbosab.imc.feature.calc.presentation.model
 
 import androidx.compose.ui.graphics.Color
+import com.github.gustavobarbosab.imc.R
 import com.github.gustavobarbosab.imc.common.UiText
 
 data class CalcScreenState(
@@ -14,11 +15,9 @@ data class CalcScreenState(
 
     companion object {
         fun initialState() = CalcScreenState(
-            bmi = UiText.TextString("--"),
-            message = UiText.TextString("Loading..."),
-            backgroundColorList = listOf(
-
-            ),
+            bmi = UiText.TextResource(R.string.calculator_message_field_default),
+            message = UiText.TextResource(R.string.calculator_message_field_loading),
+            backgroundColorList = listOf(),
             showAbout = false
         )
     }
