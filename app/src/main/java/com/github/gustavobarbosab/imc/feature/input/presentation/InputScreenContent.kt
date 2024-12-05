@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,92 +44,93 @@ fun InputScreenContent(
         0.9f to Color(0xFF8DAFFF)
     )
 
-    Column(
-        modifier
-            .background(gradient)
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box(
-            Modifier.fillMaxHeight(0.4f)
+    Scaffold {
+        Column(
+            modifier
+                .background(gradient)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                modifier = Modifier.align(Alignment.BottomCenter),
-                painter = painterResource(R.drawable.app_logo),
-                contentDescription = "App logo"
+            Box(
+                Modifier.fillMaxHeight(0.4f)
+            ) {
+                Image(
+                    modifier = Modifier.align(Alignment.BottomCenter),
+                    painter = painterResource(R.drawable.app_logo),
+                    contentDescription = "App logo"
+                )
+            }
+
+            Spacer(
+                modifier = Modifier.fillMaxHeight(0.3f)
             )
-        }
 
-        Spacer(
-            modifier = Modifier.fillMaxHeight(0.3f)
-        )
-
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = MaterialTheme.spacing.extraMedium),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
-            ),
-            suffix = { Text("kg") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Decimal,
-                imeAction = ImeAction.Next
-            ),
-            supportingText = screenState.weightFeedback.onFeedback { feedback ->
-                Text(feedback)
-            },
-            value = screenState.weight,
-            onValueChange = onWeightChanged,
-            label = { Text("Digite seu peso") },
-            placeholder = { Text("Ex: 89.3") }
-        )
-
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = MaterialTheme.spacing.extraMedium),
-            suffix = { Text("cm") },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
-            ),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Decimal,
-                imeAction = ImeAction.Go
-            ),
-            supportingText = screenState.heightFeedback.onFeedback { feedback ->
-                Text(feedback)
-            },
-            value = screenState.height,
-            onValueChange = onHeightChanged,
-            label = { Text("Digite sua altura") },
-            placeholder = { Text("Ex: 180") }
-        )
-
-        PrimaryButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = MaterialTheme.spacing.extraMedium,
-                    end = MaterialTheme.spacing.extraMedium,
-                    top = MaterialTheme.spacing.large
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = MaterialTheme.spacing.extraMedium),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                    focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                    focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
                 ),
-            onClick = onClickToCalculate
-        ) {
-            Text("Calcular")
+                suffix = { Text("kg") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Decimal,
+                    imeAction = ImeAction.Next
+                ),
+                supportingText = screenState.weightFeedback.onFeedback { feedback ->
+                    Text(feedback)
+                },
+                value = screenState.weight,
+                onValueChange = onWeightChanged,
+                label = { Text("Digite seu peso") },
+                placeholder = { Text("Ex: 89.3") }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = MaterialTheme.spacing.extraMedium),
+                suffix = { Text("cm") },
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                    focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                    focusedPlaceholderColor = MaterialTheme.colorScheme.onTertiaryContainer
+                ),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Decimal,
+                    imeAction = ImeAction.Go
+                ),
+                supportingText = screenState.heightFeedback.onFeedback { feedback ->
+                    Text(feedback)
+                },
+                value = screenState.height,
+                onValueChange = onHeightChanged,
+                label = { Text("Digite sua altura") },
+                placeholder = { Text("Ex: 180") }
+            )
+
+            PrimaryButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = MaterialTheme.spacing.extraMedium,
+                        end = MaterialTheme.spacing.extraMedium,
+                        top = MaterialTheme.spacing.large
+                    ),
+                onClick = onClickToCalculate
+            ) {
+                Text("Calcular")
+            }
         }
     }
-
 }
 
 

@@ -7,91 +7,125 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.gustavobarbosab.imc.common.components.SecondaryButton
 import com.github.gustavobarbosab.imc.common.UiText
+import com.github.gustavobarbosab.imc.common.components.SecondaryButton
 import com.github.gustavobarbosab.imc.common.value
 import com.github.gustavobarbosab.imc.feature.about.AboutBMIBottomSheet
-import com.github.gustavobarbosab.imc.feature.calc.data.entity.BMIType
 import com.github.gustavobarbosab.imc.feature.calc.presentation.model.CalcScreenBMIBackgroundColor
 import com.github.gustavobarbosab.imc.feature.calc.presentation.model.CalcScreenState
 import com.github.gustavobarbosab.imc.theme.BMITheme
 import com.github.gustavobarbosab.imc.theme.spacing
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalcScreenContent(
     modifier: Modifier = Modifier,
     screenState: CalcScreenState,
     onClickToLearnMore: () -> Unit,
-    onDismissAboutModal: () -> Unit
+    onDismissAboutModal: () -> Unit,
+    onBackPressed: () -> Unit
 ) {
-    Scaffold(
-        modifier
-    ) { padding ->
-        Column(
-            Modifier
-                .padding(padding)
-                .fillMaxSize()
-                .background(
-                    Brush.linearGradient(colorStops = screenState.backgroundColor)
+    val background = remember { Brush.linearGradient(colorStops = screenState.backgroundColor) }
+    Box(Modifier.background(background)) {
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+                    title = {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(end = MaterialTheme.spacing.extraMedium),
+                            text = "Seu IMC",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.titleMedium,
+                            color = Color.White
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onBackPressed) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back button icon"
+                            )
+                        }
+                    }
                 )
-                .padding(horizontal = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            }
+        ) { innerPadding ->
             Column(
-                modifier = Modifier.weight(0.7f),
+                modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    screenState.bmi.value,
-                    style = MaterialTheme.typography.displayLarge,
-                    color = Color.White
-                )
-
-                HorizontalDivider(
-                    modifier = Modifier
-                        .fillMaxWidth(0.7f)
-                        .padding(vertical = MaterialTheme.spacing.medium),
-                    thickness = 1.dp,
-                    color = Color.White
-                )
-
-                Text(
-                    screenState.message.value,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-
-            Box(
-                Modifier.weight(0.15f),
-                contentAlignment = Alignment.TopCenter
-            ) {
-                SecondaryButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    onClick = onClickToLearnMore,
+                Column(
+                    modifier = Modifier.weight(0.7f),
+                    verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text("Saiba mais")
-                }
-            }
+                    Text(
+                        screenState.bmi.value,
+                        style = MaterialTheme.typography.displayLarge,
+                        color = Color.White
+                    )
 
-            AboutBMIBottomSheet(
-                onDismiss = onDismissAboutModal,
-                visible = screenState.showAbout
-            )
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .fillMaxWidth(0.7f)
+                            .padding(vertical = MaterialTheme.spacing.medium),
+                        thickness = 1.dp,
+                        color = Color.White
+                    )
+
+                    Text(
+                        screenState.message.value,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+
+                Box(
+                    Modifier.weight(0.15f),
+                    contentAlignment = Alignment.TopCenter
+                ) {
+                    SecondaryButton(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        onClick = onClickToLearnMore,
+                    ) {
+                        Text("Saiba mais")
+                    }
+                }
+
+                AboutBMIBottomSheet(
+                    onDismiss = onDismissAboutModal,
+                    visible = screenState.showAbout
+                )
+            }
         }
     }
 }
@@ -109,7 +143,8 @@ private fun preview() {
                 showAbout = false
             ),
             onClickToLearnMore = {},
-            onDismissAboutModal = {}
+            onDismissAboutModal = {},
+            onBackPressed = {}
         )
     }
 }

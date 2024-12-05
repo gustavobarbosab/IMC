@@ -13,6 +13,6 @@ data class CalcScreenRoute(
 
 fun NavGraphBuilder.calcScreenRoute(navController: NavController) {
     composable<CalcScreenRoute> {
-        CalcScreen()
+        CalcScreen(navController)
     }
 }
