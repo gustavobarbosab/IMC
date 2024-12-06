@@ -31,7 +31,7 @@ interface BMIDataValidatorUseCase {
 
 class BMIDataValidatorUseCaseImpl : BMIDataValidatorUseCase {
 
-    private val validationRegex = Regex("\\d{1,3}[.,]?\\d{0,2}")
+    private val validationRegex = Regex("\\d{1,3}([.,]\\d{0,2})?")
 
     override fun validate(
         weight: String?,

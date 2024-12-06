@@ -101,6 +101,7 @@ class InputScreenViewModel(
             )
         }
         viewModelScope.launch {
+            _viewAction.emit(ViewActions.CloseKeyboard)
             _viewAction.emit(ViewActions.RedirectToCalc(weight, height))
         }
     }
@@ -111,5 +112,7 @@ class InputScreenViewModel(
             val weight: Float,
             val height: Int
         ) : ViewActions()
+
+        data object CloseKeyboard : ViewActions()
     }
 }

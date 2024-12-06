@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -69,7 +69,7 @@ fun CalcScreenContent(
                     navigationIcon = {
                         IconButton(onClick = onBackPressed) {
                             Icon(
-                                Icons.AutoMirrored.Filled.ArrowBack,
+                                Icons.Outlined.Close,
                                 contentDescription = stringResource(R.string.calculator_toolbar_back_button_content_description)
                             )
                         }
