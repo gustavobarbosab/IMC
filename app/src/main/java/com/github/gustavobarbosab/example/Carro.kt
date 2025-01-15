@@ -1,27 +1,27 @@
 package com.github.gustavobarbosab.example
 
-class VoceNaoTemCombustivelException(override val message: String? = null) : Throwable(message)
-
-class CarroDesligadoException(override val message: String? = null) : Throwable(message)
-
 class Carro {
     private val motor = Motor()
     private val tanqueDeCombustivel = TanqueDeCombustivel(capacidadeEmLitros = 60)
 
-    fun ligar() {
+    fun ligar(): Boolean {
         if (!tanqueDeCombustivel.temCombustivel()) {
-            throw VoceNaoTemCombustivelException("Carro está sem combustível!")
+            println("Carro está sem combustível!")
+            return false
         }
 
         motor.ligar()
+        return true
     }
 
-    fun andar() {
+    fun acelerar(): Boolean {
         if (!motor.ligado) {
-            throw CarroDesligadoException("Seu carro está desligado, ligue para andar!")
+            println("Seu carro está desligado, ligue para andar!")
+            return false
         }
 
         tanqueDeCombustivel.consumirCombustivel(quantidade = 1)
+        return true
     }
 
     fun desligar() {
@@ -45,8 +45,7 @@ class Motor {
 
 class TanqueDeCombustivel(val capacidadeEmLitros: Int) {
 
-    var nivelDeCombustivel = capacidadeEmLitros
-        private set
+    private var nivelDeCombustivel = capacidadeEmLitros
 
     fun consumirCombustivel(quantidade: Int) {
         nivelDeCombustivel = minOf(nivelDeCombustivel - quantidade, 0)
@@ -62,5 +61,5 @@ fun main() {
     val carro = Carro()
 
     // simulando exceção
-    carro.andar()
+    carro.acelerar()
 }
