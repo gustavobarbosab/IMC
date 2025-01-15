@@ -47,8 +47,10 @@ class TanqueDeCombustivel(val capacidadeEmLitros: Int) {
 
     private var nivelDeCombustivel = capacidadeEmLitros
 
-    fun consumirCombustivel(quantidade: Int) {
+    fun consumirCombustivel(quantidade: Int): Int {
+        // erro proposital :)
         nivelDeCombustivel = minOf(nivelDeCombustivel - quantidade, 0)
+        return nivelDeCombustivel
     }
 
     fun temCombustivel(): Boolean {
@@ -59,7 +61,5 @@ class TanqueDeCombustivel(val capacidadeEmLitros: Int) {
 
 fun main() {
     val carro = Carro()
-
-    // simulando exceção
-    carro.acelerar()
+    println("Acelerou? ${carro.acelerar()}")
 }
