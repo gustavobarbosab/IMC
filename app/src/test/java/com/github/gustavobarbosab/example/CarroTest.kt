@@ -5,7 +5,7 @@ import org.junit.Test
 class CarroTest {
 
     @Test
-    fun `quando ligar o carro já ligado, não deve ocorrer nada`() {
+    fun `quando ligar o carro já ligado, o carro deve manter o motor ligado`() {
 
     }
 
@@ -20,17 +20,17 @@ class CarroTest {
     }
 
     @Test
-    fun `quando ligar o carro sem combustivel, deve receber uma exceção`() {
+    fun `quando ligar o carro sem combustivel, não deve ligar o carro`() {
 
     }
 
     @Test
-    fun `quando acelerar o carro ligado, deve consumir combustivel`() {
+    fun `quando acelerar o carro ligado, deve consumir combustivel e acelerar`() {
 
     }
 
     @Test
-    fun `quando acelerar o carro desligado, não deve consumir combustivel`() {
+    fun `quando acelerar o carro desligado, não deve consumir combustivel e não irá acelerar`() {
 
     }
 }
