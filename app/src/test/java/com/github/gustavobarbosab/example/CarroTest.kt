@@ -5,7 +5,7 @@ import org.junit.Test
 class CarroTest {
 
     @Test
-    fun `quando ligar o carro já ligado, o carro deve manter o motor ligado`() {
+    fun `quando ligar o carro já ligado e tem combustível, o carro deve manter o motor ligado`() {
 
     }
 
