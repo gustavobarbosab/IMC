@@ -1,16 +1,18 @@
 package com.github.gustavobarbosab.example
 
-class Carro {
-    private val motor = Motor()
-    private val tanqueDeCombustivel = TanqueDeCombustivel(capacidadeEmLitros = 60)
-
+class Carro(
+    private val motor: Motor,
+    private val tanqueDeCombustivel: TanqueDeCombustivel
+) {
     fun ligar(): Boolean {
         if (!tanqueDeCombustivel.temCombustivel()) {
             println("Carro está sem combustível!")
             return false
         }
 
-        motor.ligar()
+        if (!motor.ligado) {
+            motor.ligar()
+        }
         return true
     }
 
@@ -48,8 +50,7 @@ class TanqueDeCombustivel(val capacidadeEmLitros: Int) {
     private var nivelDeCombustivel = capacidadeEmLitros
 
     fun consumirCombustivel(quantidade: Int): Int {
-        // erro proposital :)
-        nivelDeCombustivel = minOf(nivelDeCombustivel - quantidade, 0)
+        nivelDeCombustivel = maxOf(nivelDeCombustivel - quantidade, 0)
         return nivelDeCombustivel
     }
 
@@ -60,6 +61,8 @@ class TanqueDeCombustivel(val capacidadeEmLitros: Int) {
 
 
 fun main() {
-    val carro = Carro()
+    val motor = Motor()
+    val tanqueDeCombustivel = TanqueDeCombustivel(capacidadeEmLitros = 50)
+    val carro = Carro(motor, tanqueDeCombustivel)
     println("Acelerou? ${carro.acelerar()}")
 }
